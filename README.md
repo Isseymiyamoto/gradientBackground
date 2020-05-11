@@ -1,0 +1,2 @@
+# gradientBackground
+navigationbarのbackgroundColorをただグラデーションカラーにする
