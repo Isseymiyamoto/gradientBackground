@@ -11,7 +11,7 @@ Swiftを勉強し始めて、3ヶ月強とまだ日は浅いですが、
 
 ## 完成形
 
-![backgroundSwift.gif](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/532395/4a8d8243-b82b-caac-10a9-52c457a9ccc7.gif)
+
 
 GIFだとなんか色汚い感がありますね、悲しい。。
 
