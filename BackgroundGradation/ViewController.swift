@@ -31,27 +31,29 @@ class ViewController: UIViewController {
         configure()
         configureNavigationBar(color1: UIColor.red.cgColor, color2: UIColor.blue.cgColor)
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        self.title = "Gradient Color"
-        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
-        navigationController?.navigationBar.barStyle = .default
-        navigationController?.navigationBar.isHidden = false
-    }
+
     
     // MARK: - Helpers
     
     func configure(){
+        // viewの背景色
         view.backgroundColor = .white
         
+        // buttonの配置
         view.addSubview(ChangeColorButton)
         ChangeColorButton.center(inView: view)
         ChangeColorButton.setDimensions(width: view.frame.width - 64, height: 60)
     }
     
     func configureNavigationBar(color1: CGColor, color2: CGColor ){
+        
+        // navigationBarに関する諸設定
+        self.title = "Gradient Color"
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+        navigationController?.navigationBar.barStyle = .default
+        navigationController?.navigationBar.isHidden = false
+        
+        
         if let navigationBar = self.navigationController?.navigationBar {
             let gradient = CAGradientLayer()
             var bounds = navigationBar.bounds
