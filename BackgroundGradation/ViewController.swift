@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController {
     
     // MARK: - Properties
-    private let ChangeColorButton: UIButton = {
+    private lazy var ChangeColorButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Change Color", for: .normal)
         button.setTitleColor(.systemPink, for: .normal)
@@ -22,20 +22,29 @@ class ViewController: UIViewController {
         return button
     }()
     
+    private let colors = [UIColor.red.cgColor, UIColor.blue.cgColor, UIColor.yellow.cgColor,
+                          UIColor.systemPink.cgColor, UIColor.darkGray.cgColor, UIColor.systemGreen.cgColor,
+                          UIColor.black.cgColor, UIColor.lightGray.cgColor]
     
     // MARK: - Lifecycle
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configure()
+        configureUI()
         configureNavigationBar(color1: UIColor.red.cgColor, color2: UIColor.blue.cgColor)
     }
-
+    
     
     // MARK: - Helpers
     
-    func configure(){
+    func configureUI(){
+        // navigationBarに関する諸設定
+        self.title = "Gradient Color"
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+        navigationController?.navigationBar.barStyle = .default
+        navigationController?.navigationBar.isHidden = false
+        
         // viewの背景色
         view.backgroundColor = .white
         
@@ -47,13 +56,6 @@ class ViewController: UIViewController {
     
     func configureNavigationBar(color1: CGColor, color2: CGColor ){
         
-        // navigationBarに関する諸設定
-        self.title = "Gradient Color"
-        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
-        navigationController?.navigationBar.barStyle = .default
-        navigationController?.navigationBar.isHidden = false
-        
-        
         if let navigationBar = self.navigationController?.navigationBar {
             let gradient = CAGradientLayer()
             var bounds = navigationBar.bounds
@@ -64,13 +66,14 @@ class ViewController: UIViewController {
             gradient.endPoint = CGPoint(x: 1, y: 0)
             
             if let image = getImageFrom(gradientLayer: gradient) {
-                navigationBar.setBackgroundImage(image, for: UIBarMetrics.default)
+                // navigationBarに生成したimageをセットする
+                navigationBar.setBackgroundImage(image, for: .default)
             }
         }
     }
     
-    func getImageFrom(gradientLayer:CAGradientLayer) -> UIImage? {
-        var gradientImage:UIImage?
+    func getImageFrom(gradientLayer: CAGradientLayer) -> UIImage? {
+        var gradientImage: UIImage?
         UIGraphicsBeginImageContext(gradientLayer.frame.size)
         if let context = UIGraphicsGetCurrentContext() {
             gradientLayer.render(in: context)
@@ -84,9 +87,12 @@ class ViewController: UIViewController {
     
     @objc func handleChangeBackgroundColor(){
         // navigationBarの色を変える処理をかく
+        let random1 = Int.random(in: 0 ..< colors.count)
+        let random2 = Int.random(in: 0 ..< colors.count)
         
+        configureNavigationBar(color1: colors[random1], color2: colors[random2])
     }
-
-
+    
+    
 }
 
